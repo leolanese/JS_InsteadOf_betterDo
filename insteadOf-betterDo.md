@@ -1,4 +1,4 @@
-# JS Best Practices
+# JS instead of -> better do Best Practices
 
 ## Array Methods
 
