@@ -1,301 +1,9 @@
-# JS Good Practices
+# JavaScript `❌ instead of 💩` -> `Better do ✅`
 
-> `instead of` -> `better do`
-
-## Array Methods
+## Falsy checks
 
 ```js
-[3, 4, 5, 6].at(1); // 4
-[3, 4, 5, 6].pop(); // [3, 4, 5)
-[3, 4, 5, 6].push(7); // [3, 4, 5, 6, 7]
-[3, 4, 5, 6].fill(1); // [1, 2, 1, 1]
-[3, 4, 5, 6].join(" - "); // '3-4-5-6'
-[3, 4, 5, 6].shift(); // [4, 5, 6]
-[3, 4, 5, 6].unshift(1); // [1, 3, 4, 5, 6]
-[3, 4, 5, 6].includes(5); // true
-[3, 4, 5, 6].map((num) => num + 6); // [9, 10, 11, 12)
-[3, 4, 5, 6].find((num) => num > 4); // 5
-[{ id: 1, name: 'Apple' }].find(obj => obj.name === 'Apple'); // {id: 1, name: 'Apple'}
-[3, 4, 5, 6].some((num) => num === 5); // true
-[{ id: 1, name: 'Apple' }].some(obj => obj.name === 'Apple'); // true
-[3, 4, 5, 6].filter((num) => num > 4); // [5, 6]
-[3, 4, 5, 6].every((num) => num > 5); // false
-[3, 4, 5, 6].findIndex((num) => num > 4); // 2
-[3, 4, 5, 6].reduce((acc, num) => acc + num); // 18
-[[3, 4, 5], [6]].flat(); // [3, 4, 5, 6]
-[3, 4, 5, 6].flatMap((el) => [el, el * el]); // [3, 9, 4, 16, 5, 25, 6, 36]
-[1, 2, 3, 4, 5].reduceRight((total, item) => total + item, 0); // 15
-[1, 2, 3, 4, 5].fill(0); // [0, 0, 0, 0, 0]
-[3, 4, 5, 6].reverse(); // [6, 5, 4, 3]
-[{x:1},{x:2},{x:3}].reverse(); // [{x:3},{x:2},{x:1}]
-"Hello".repeat(5); // 'HelloHelloHelloHelloHello'
-["hello", "howdy", "Leo"].some((x) => "Leo, how do you do?".includes(x));  // true
-"TechOnTheNet".startsWith("On", 4); // true
-'Hello World!'.endsWith("World!"); // true 
-5.56789.toFixed(1); // 5.6
-['A','B','C','D','E'].map(letter => letter.charCodeAt(0)); // [65, 66, 67, 68, 69]
-```
-
----
-
-## for await...of
-
-The for await...of statement creates a loop iterating over async iterable objects as well as sync iterables
-
----
-
-## serialize an object to a URL
-
-```js
-let url = 'https://medium.com'
-const query = {
-  name: 'fatfish',
-  age: 100,
-}
-url += '?' + Object.entries(query).map(([ key, value ]) => `${key}=${value}`).join('&')
-```
-
----
-
-## Map vs Object 
-
-👉 Maps and objects are two commonly used data structures in programming languages, and both have their unique features and use cases. Understanding when to use a map vs an object can be a bit tricky, but this post will break down the differences and provide some guidance on when to use each.
-
-✔️ An object is a collection of key-value pairs where each key must be a string or a symbol, and the value can be any data type. 
-
-✔️ On the other hand, a map is a collection of key-value pairs where each key can be any data type, including objects and functions. Maps are useful when you need to store a large amount of data that is not necessarily related or when you need to quickly look up values based on a particular key. For example, you could use a map to store a list of customers and their order histories.
-
-💡💡 So, when should you use a map vs an object? Here are some general guidelines:
-
-💎 𝐔𝐬𝐢𝐧𝐠 𝐎𝐛𝐣𝐞𝐜𝐭𝐬 𝐟𝐨𝐫 𝐒𝐭𝐨𝐫𝐢𝐧𝐠 𝐚𝐧𝐝 𝐀𝐜𝐜𝐞𝐬𝐬𝐢𝐧𝐠 𝐑𝐞𝐥𝐚𝐭𝐞𝐝 𝐃𝐚𝐭𝐚:
-Use an object when you need to store and access related data. For example, if you are building a system to manage employees, you might use an object to represent each employee, with properties such as name, age, and job title.
-
-💎 𝐌𝐚𝐧𝐚𝐠𝐢𝐧𝐠 𝐋𝐚𝐫𝐠𝐞, 𝐔𝐧𝐫𝐞𝐥𝐚𝐭𝐞𝐝 𝐃𝐚𝐭𝐚 𝐰𝐢𝐭𝐡 𝐌𝐚𝐩𝐬:
-Use a map when you need to store a large amount of data that is not necessarily related. For example, if you are building a system to manage a database of customer orders, you might use a map to store each order, with the order ID as the key and the order details as the value.
-
-💎 𝐄𝐟𝐟𝐢𝐜𝐢𝐞𝐧𝐭 𝐃𝐚𝐭𝐚 𝐋𝐨𝐨𝐤𝐮𝐩 𝐰𝐢𝐭𝐡 𝐌𝐚𝐩𝐬:
-Use a map when you need to quickly look up values based on a particular key. Maps are optimized for fast lookups, so they are ideal when you need to access data based on a specific key.
-
-💎 𝐏𝐞𝐫𝐟𝐨𝐫𝐦𝐢𝐧𝐠 𝐃𝐚𝐭𝐚 𝐎𝐩𝐞𝐫𝐚𝐭𝐢𝐨𝐧𝐬 𝐰𝐢𝐭𝐡 𝐎𝐛𝐣𝐞𝐜𝐭𝐬:
-Use an object when you need to perform operations on the data. Objects can have methods, which allow you to define functions that operate on the data stored in the object.
-
-💡💡 In conclusion, both `maps` and `objects` have their unique features and use cases. Understanding when to use each depends on the specific requirements of your program. When in doubt, consider the nature of the data you need to store and how you will access it.
-
----
-
-## Page Visibility API's `visibilityChange` 
-
-> The Page Visibility API provides a way for web developers to determine whether a web page is currently visible to the user or hidden, such as when the user switches to another `tab` or `minimizes` the browser window. 
-
-```js
-document.addEventListener('visibilitychange', function() {
-  if (document.hidden) {
-    // The page is now hidden, such as when the user switches to another tab.
-    // You can take some action when the page is not visible.
-  } else {
-    // The page is now visible again.
-    // You can take some action when the page is visible.
-  }
-});
-```
-
-
----
-
-## Changing shape of objects inside arrays
-
-```js
-// Create array of numbers:
-const records = [
-  { name: 'Joe', grade: 'A' },
-  { name: 'Tom', grade: 'B' },
-  { name: 'Sandra', grade: 'B' },
-  { name: 'Joel', grade: 'C' },
-  { name: 'Victoria', grade: 'A' }
-]
-
-const updatedRecords = records.reduce((accumulator, currentItem) => {
-  accumulator[currentItem.name] = {
-    grade: currentItem.grade,
-    passed: ['A', 'B'].includes(currentItem.grade)
-  }
-  return accumulator
-}, {})
-
-
-console.log(updatedRecords)
-// {
-//   Joe: { grade: 'A', passed: true },
-//   Tom: { grade: 'B', passed: true },
-//   Sandra: { grade: 'B', passed: true },
-//   Joel: { grade: 'C', passed: false },
-//   Victoria: { grade: 'A', passed: true }
-// }
-```
-
----
-
-## Counting number of occurrences
-
-```js
-const fruit = ['apple', 'pear', 'lemon', 'avocado', 'apple', 'banana', 'pear', 'apple', 'pineapple'];
-
-const occurrences = fruit.reduce((accumulator, currentItem) => {
-  if (currentItem in accumulator) {
-    accumulator[currentItem] = accumulator[currentItem] + 1
-  } else {
-    accumulator[currentItem] = 1
-  }
-  return accumulator
-}, {})
-
-
-console.log(occurrences); // {apple: 3,pear: 2,lemon: 1,avocado: 1, banana: 1,pineapple: 1 }
-```
-
----
-
-## output the `age` + quantity
-
-```js
-const user = [
-    {name:'Tom', familyName: 'Lanese', age: 8},
-    {name:'Leo', familyName: 'Lanese', age: 40},
-    {name:'Carley', familyName: 'Lanese', age: 40}
-]
-
-const caca = user.reduce((acc, val) => {
-    console.log(acc, val, acc[val.age]);
-  
-    if (acc[val.age]) {
-      acc[val.age]++    
-    } else {
-      acc[val.age] = 1  
-    }
-    
-    return acc
-}, {})
-```
-
----
-
-## Remove min from Array
-
-```js
-const numbers = [1, 2, 3, 4, 5];
-
-const min = numbers.reduce((acc, value) => acc < value ? acc : value) // 1
-
-numbers.filter(value => value !== min) // [2, 3, 4, 5]
-```
-
----
-
-## Finding min & max values: MinMax
-
-```js
-const numbers = [1, 2, 3, 4, 5, 6];
-
-// The callback function is called for each element in the array
-// If the current `value` is less than the `acc` it returns value; otherwise, it returns acc.
-const min = numbers.reduce((acc, value, i) => {
-  return acc < value ? acc : value;
-})
-
-console.log(min) // 1
-```
-
-```js
-const numbers = [1, 2, 3, 4, 5, 6];
-
-const max = numbers.reduce((accumulator, currentValue) => {
-  return accumulator > currentValue ? accumulator : currentValue;
-})
-
-console.log(max) // 6
-```
-
----
-
-## Summing values in an array
-
-```js
-const numbers = [1, 3, 5, 7, 9, 11];
-
-const sum = numbers.reduce((accumulator, currentValue, index) => accumulator + currentValue, 0)
-
-console.log(sum) // 36
-```
-
----
-
-## Find property in array of object and take it away
-
-```js
-const myArray = [
-  { id: 1, name: "Alice" },
-  { id: 2, name: "Bob" },
-  { id: 3, name: "Charlie" },
-];
-
-const propertyToRemove = "name";
-
-const newArray = myArray.filter(obj => !(propertyToRemove in obj));
-
-console.log(newArray); // [{ id: 1 }, { id: 2 }, { id: 3 }]
-```
-
----
-
-## Find Indexes of All Occurrences of an Element in Array
-
-```js
-const arr = ["Nano", "Volvo", "BMW", "Nano", "VW", "Nano"]
-  .reduce((acc, val, i) => {
-    if (val === 'Nano')
-      acc.push(i);
-    return acc;
-}, []);
-
-console.log(arr); // [0, 3, 5]
-```
-
----
-
-### Convert an Array of Objects into One Object in JavaScript
-
-```js
-const arr = [{
-  key: "11",
-  value: "1100"
-}, {
-  key: "22",
-  value: "2200"
-}];
-const object = arr.reduce((obj, item) => ({
-  ...obj,
-  [item.key]: item.value
-}), {});
-
-console.log(object); // {11: '1100', 22: '2200'}
-```
-
----
-
-## Get the last item in the list
-
-```js
-let array = [0, 1, 2, 3, 4, 5, 6, 7];
-
-console.log(array.slice(-1)) >>> [7]; // [7]
-```
-
----
-
-### Falsy checks
-
-```js
-// instead of
+// ❌ instead of 💩
 // Long-hand
 const isFalsey = (value) => {
   if (
@@ -311,7 +19,7 @@ const isFalsey = (value) => {
   return false;
 };
 
-// better do
+// Better do ✅
 // Short-hand
 const isFalsey = value => !!(value || value === 0);
 ```
@@ -321,7 +29,7 @@ const isFalsey = value => !!(value || value === 0);
 ## Ternary operator
 
 ```js
-// instead of
+// ❌ instead of 💩
 // Long-hand
 let info;
 if (value < minValue) {
@@ -332,7 +40,7 @@ if (value < minValue) {
   info = "Value is in range";
 }
 
-// better do
+// Better do ✅
 // Short-hand
 const info =
   value < minValue
@@ -342,34 +50,10 @@ const info =
 
 ---
 
-### Get the last item in the list function
-
-```js
-let array = [0, 1, 2, 3, 4, 5, 6, 7];
-
-function lastItem(list) {
-  if (Array.isArray(list)) {
-    return list.slice(-1)[0];
-  }
-  
-  if (list instanceof Set) {
-    return Array.from(list).slice(-1)[0];
-  }
-  
-  if (list instanceof Map) {
-    return Array.from(list.values()).slice(-1)[0];
-  }
-}
-
-console.log(lastItem(array)); // 7
-```
-
----
-
 ## Return after comparison
 
 ```js
-// insteaf of
+// ❌ instead of 💩
 let test;
 function checkReturn() {
   if (!(test === undefined)) {
@@ -379,7 +63,7 @@ function checkReturn() {
   }
 }
 
-// better do
+// Better do ✅
 function checkReturn() {
   return test ?? callMe("test");
 }
@@ -400,26 +84,6 @@ function add(test1, test2) {
 // better do
 add = (test1 = 1, test2 = 2) => test1 + test2;
 add(); //output: 3
-```
-
----
-
-## if (!response) return;
-
-```js
-this.buyTestService
-  .submit(request)
-  .pipe(first())
-  .subscribe(
-    (response: CardHolderName) => {
-      if (!response) return;
-
-      'isValid' in response
-        ? this.validationSuccess.emit({ valid: true, name: request.cardHolderName })
-        : (this.serverErrors = errorMessage);
-    },
-    (error: HttpError) => this.snackbarService.open(error.message),
-  );
 ```
 
 ---
@@ -1596,7 +1260,7 @@ if ([ STATUS.adultRealName, STATUS.minorRealName ].includes(status)) {
 ## Remove call back hell
 
 ```js
-// instead of
+// ❌ instead of 💩
 fetch('/a')
   .then((a) => {
     fetch('/b', { a })
@@ -1622,7 +1286,7 @@ console.log(c); //
 ### reduce parameters to the function
 
 ```js
-// instead of
+// ❌ instead of 💩
 const getUser = (name, weight, mobile, gender, address, hobby, ...) => {
   // ...
   return ...
@@ -3084,7 +2748,7 @@ let actualNum = num ?? 0 // 0
 ### Implicit Return Shorthand
 
 ```js
-/// instead f
+/// ❌ instead of 💩
 function calcCircumference(diameter) {
   return Math.PI * diameter;
 }
@@ -3545,7 +3209,7 @@ class Person {
 ### Join & shollow clone arrays using spread operators
 
 ```js
-// instead of
+// ❌ instead of 💩
 const oddNumbers = [3,5,7]
 const numbers = [2,4,6].concat(oddNumbers);
 
@@ -3556,7 +3220,7 @@ const arrayClone = [...array];
 ```
 
 ```js
-// instead of
+// ❌ instead of 💩
 // not Object.assign()
 const arr = [1, 2, 3]
 const biggerArr = [4,5,6].concat(arr)
