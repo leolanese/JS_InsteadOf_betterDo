@@ -1,4 +1,6 @@
-# JS instead of -> better do Best Practices
+# JS Good Practices
+
+> `instead of` -> `better do`
 
 ## Array Methods
 
